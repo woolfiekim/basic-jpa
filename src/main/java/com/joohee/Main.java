@@ -12,25 +12,33 @@ public class Main {
 
         try {
 
-            Team team = new Team();
-            team.setName("teamA");
-            em.persist(team);
+            // Team team = new Team();
+            // team.setName("teamA");
+            // em.persist(team);
+            //
+            // Member member = new Member();
+            // member.setUsername("memberB");
+            // member.setAge(10);
+            // member.setTeam(team);
+            // em.persist(member);
 
-            Member member = new Member();
-            member.setUsername("memberA");
-            member.setAge(10);
-            member.setTeam(team);
-            em.persist(member);
+            // em.flush(); //DB에 insert 쿼리가 나간다.
+            // em.clear();
+            //
+            // String query = "select m from Member m, Team t where m.username =  t.name";
+            //
+            // List<Member> result = em.createQuery(query, Member.class)
+            //         .getResultList();
+            //
+            // System.out.println("result = " + result.size());
 
-            em.flush();
+            Member member1 = em.find(Member.class, 1L);
+
             em.clear();
 
-            String query = "select m from Member m, Team t where m.username =  t.name";
+            Member member2 = em.find(Member.class, 1L);
 
-            List<Member> result = em.createQuery(query, Member.class)
-                    .getResultList();
-
-            System.out.println("result = " + result.size());
+            System.out.println(member1 == member2);
 
             tx.commit();
         } catch (Exception e) {
