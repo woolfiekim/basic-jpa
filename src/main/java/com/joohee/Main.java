@@ -32,13 +32,30 @@ public class Main {
             //
             // System.out.println("result = " + result.size());
 
-            Member member1 = em.find(Member.class, 1L);
+            // Member member1 = em.find(Member.class, 1L);
+            //
+            // em.clear();
+            //
+            // Member member2 = em.find(Member.class, 1L);
+            //
+            // System.out.println(member1 == member2);
 
+            Team team = new Team();
+            team.setName("TeamA");
+            em.persist(team);
+
+            Member member = new Member();
+            member.setUsername("member1");
+            member.setTeam(team);
+            em.persist(member);
+
+            em.flush();
             em.clear();
 
-            Member member2 = em.find(Member.class, 1L);
+            Member findMember = em.find(Member.class, member.getId());
+            List<Member> members = findMember.getTeam().getMembers();
 
-            System.out.println(member1 == member2);
+
 
             tx.commit();
         } catch (Exception e) {

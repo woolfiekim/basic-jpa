@@ -53,6 +53,10 @@ public class Member {
         this.team = team;
     }
 
+    public Team getTeam() {
+        return team;
+    }
+
     @Override
     public String toString() {
         return "Member{" +

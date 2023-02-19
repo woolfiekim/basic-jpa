@@ -1,5 +1,6 @@
 package com.joohee;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -12,6 +13,7 @@ public class Team {
 
     @Id
     @GeneratedValue
+    @Column(name = "TEAM_ID")
     private Long id;
 
     @OneToMany(mappedBy = "team")
@@ -41,5 +43,10 @@ public class Team {
 
     public void setMembers(List<Member> members) {
         this.members = members;
+    }
+
+    public void addMember(Member member){
+        member.setTeam(this);
+        members.add(member);
     }
 }
